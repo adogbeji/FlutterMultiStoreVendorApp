@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+
 class VendorAuthScreen extends StatefulWidget {
   const VendorAuthScreen({super.key});
 
@@ -10,10 +13,14 @@ class VendorAuthScreen extends StatefulWidget {
 class _VendorAuthScreenState extends State<VendorAuthScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Vendor Auth Screen'),
-      ),
-    );
+    return StreamBuilder<User?>(stream: FirebaseAuth.instance.authStateChanges(), initialData: FirebaseAuth.instance.currentUser, builder: (context, snapshot) {
+      if (!snapshot.hasData) {
+        return SignInScreen(
+          providers: [
+            EmailAuthProvider(),
+          ],
+        );
+      }
+    },);
   }
 }
