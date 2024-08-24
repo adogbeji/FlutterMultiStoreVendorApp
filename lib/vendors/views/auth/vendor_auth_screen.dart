@@ -21,6 +21,8 @@ class _VendorAuthScreenState extends State<VendorAuthScreen> {
           ],
         );
       }
+
+      return const Text('Authenticated');
     },);
   }
 }
