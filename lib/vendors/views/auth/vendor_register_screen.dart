@@ -6,8 +6,13 @@ class VendorRegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(
-        child: Text('Vendor Register Screen'),
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            backgroundColor: Colors.pink,
+            toolbarHeight: 200,
+          ),
+        ],
       ),
     );
   }

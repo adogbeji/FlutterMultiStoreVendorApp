@@ -15,16 +15,18 @@ class VendorAuthScreen extends StatefulWidget {
 class _VendorAuthScreenState extends State<VendorAuthScreen> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<User?>(stream: FirebaseAuth.instance.authStateChanges(), initialData: FirebaseAuth.instance.currentUser, builder: (context, snapshot) {
-      if (!snapshot.hasData) {
-        return SignInScreen(
-          providers: [
-            EmailAuthProvider(),
-          ],
-        );
-      }
+    // return StreamBuilder<User?>(stream: FirebaseAuth.instance.authStateChanges(), initialData: FirebaseAuth.instance.currentUser, builder: (context, snapshot) {
+    //   if (!snapshot.hasData) {
+    //     return SignInScreen(
+    //       providers: [
+    //         EmailAuthProvider(),
+    //       ],
+    //     );
+    //   }
 
-      return const VendorRegisterScreen();
-    },);
+    //   return const VendorRegisterScreen();
+    // },);
+
+    return const VendorRegisterScreen();
   }
 }
