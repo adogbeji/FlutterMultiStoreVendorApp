@@ -45,6 +45,43 @@ class VendorRegisterScreen extends StatelessWidget {
               );
             }),
           ),
+
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                children: [
+                  // BUSINESS NAME INPUT FIELD
+                  TextFormField(
+                    keyboardType: TextInputType.name,  // Default??
+                    decoration: const InputDecoration(
+                      labelText: 'Business Name',
+                    ),
+                  ),
+
+                  const SizedBox(height: 10,),
+
+                  // EMAIL INPUT FIELD
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      labelText: 'Email',
+                    ),
+                  ),
+
+                  const SizedBox(height: 10,),
+
+                  // PHONE INPUT FIELD
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      labelText: 'Phone Number',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
