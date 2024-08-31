@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
-class VendorRegisterScreen extends StatelessWidget {
+import 'package:country_state_city_picker_2/country_state_city_picker.dart';
+
+class VendorRegisterScreen extends StatefulWidget {
   const VendorRegisterScreen({super.key});
+
+  @override
+  State<VendorRegisterScreen> createState() => _VendorRegisterScreenState();
+}
+
+class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
+  late String countryValue;
+
+  late String stateValue;
+
+  late String cityValue;
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +90,28 @@ class VendorRegisterScreen extends StatelessWidget {
                     decoration: const InputDecoration(
                       labelText: 'Phone Number',
                     ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(14.0),
+                    child: SelectState(
+                                  onCountryChanged: (value) {
+                                  setState(() {
+                                    countryValue = value;
+                                  });
+                                },
+                                onStateChanged:(value) {
+                                  setState(() {
+                                    stateValue = value;
+                                  });
+                                },
+                                 onCityChanged:(value) {
+                                  setState(() {
+                                    cityValue = value;
+                                  });
+                                },
+                                
+                                ),
                   ),
                 ],
               ),
