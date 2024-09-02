@@ -1,6 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:country_state_city_picker_2/country_state_city_picker.dart';
+import 'package:image_picker/image_picker.dart';
+
+import 'package:multi_store_vendor/vendors/controllers/vendor_register_controller.dart';
 
 class VendorRegisterScreen extends StatefulWidget {
   const VendorRegisterScreen({super.key});
@@ -10,11 +14,25 @@ class VendorRegisterScreen extends StatefulWidget {
 }
 
 class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
+  final VendorController _vendorController = VendorController();  // Stores VendorController class
+
   late String countryValue;
 
   late String stateValue;
 
   late String cityValue;
+
+  Uint8List? _image;  // Stores picked image
+
+  
+  // Picks image from phone gallery
+  selectGalleryImage() async {
+    Uint8List im = _vendorController.pickStoreImage(ImageSource.gallery);  // Stores picked image
+
+    setState(() {
+      _image = im;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +65,9 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              selectGalleryImage();
+                            },
                             icon: const Icon(Icons.camera_alt),
                           ),
                         ),
@@ -58,7 +78,6 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
               );
             }),
           ),
-
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -66,7 +85,7 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                 children: [
                   // BUSINESS NAME INPUT FIELD
                   TextFormField(
-                    keyboardType: TextInputType.name,  // Default??
+                    keyboardType: TextInputType.name, // Default??
                     decoration: const InputDecoration(
                       labelText: 'Business Name',
                     ),
@@ -95,23 +114,22 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                   Padding(
                     padding: const EdgeInsets.all(14.0),
                     child: SelectState(
-                                  onCountryChanged: (value) {
-                                  setState(() {
-                                    countryValue = value;
-                                  });
-                                },
-                                onStateChanged:(value) {
-                                  setState(() {
-                                    stateValue = value;
-                                  });
-                                },
-                                 onCityChanged:(value) {
-                                  setState(() {
-                                    cityValue = value;
-                                  });
-                                },
-                                
-                                ),
+                      onCountryChanged: (value) {
+                        setState(() {
+                          countryValue = value;
+                        });
+                      },
+                      onStateChanged: (value) {
+                        setState(() {
+                          stateValue = value;
+                        });
+                      },
+                      onCityChanged: (value) {
+                        setState(() {
+                          cityValue = value;
+                        });
+                      },
+                    ),
                   ),
                 ],
               ),
