@@ -27,7 +27,7 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
   
   // Picks image from phone gallery
   selectGalleryImage() async {
-    Uint8List im = _vendorController.pickStoreImage(ImageSource.gallery);  // Stores picked image
+    Uint8List im = await _vendorController.pickStoreImage(ImageSource.gallery);  // Stores picked image
 
     setState(() {
       _image = im;
@@ -64,7 +64,7 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: IconButton(
+                          child: _image != null ? Image.memory(_image!): IconButton(
                             onPressed: () {
                               selectGalleryImage();
                             },
