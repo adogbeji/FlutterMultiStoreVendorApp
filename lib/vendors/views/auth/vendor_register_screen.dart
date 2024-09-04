@@ -34,6 +34,15 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
     });
   }
 
+  // Captures image with phone camera
+  selectCameraImage() async {
+    Uint8List im = await _vendorController.pickStoreImage(ImageSource.camera);  // Stores captured image
+
+    setState(() {
+      _image = im;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,6 +139,15 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                         });
                       },
                     ),
+                  ),
+
+                  Row(
+                    children: [
+                      Text('Tax Registered?', style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),)
+                    ],
                   ),
                 ],
               ),
