@@ -14,7 +14,8 @@ class VendorRegisterScreen extends StatefulWidget {
 }
 
 class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
-  final VendorController _vendorController = VendorController();  // Stores VendorController class
+  final VendorController _vendorController =
+      VendorController(); // Stores VendorController class
 
   late String countryValue;
 
@@ -22,12 +23,14 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
 
   late String cityValue;
 
-  Uint8List? _image;  // Stores picked image
+  Uint8List? _image; // Stores picked image
 
-  
+  String? _taxStatus;
+
   // Picks image from phone gallery
   selectGalleryImage() async {
-    Uint8List im = await _vendorController.pickStoreImage(ImageSource.gallery);  // Stores picked image
+    Uint8List im = await _vendorController
+        .pickStoreImage(ImageSource.gallery); // Stores picked image
 
     setState(() {
       _image = im;
@@ -36,12 +39,15 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
 
   // Captures image with phone camera
   selectCameraImage() async {
-    Uint8List im = await _vendorController.pickStoreImage(ImageSource.camera);  // Stores captured image
+    Uint8List im = await _vendorController
+        .pickStoreImage(ImageSource.camera); // Stores captured image
 
     setState(() {
       _image = im;
     });
   }
+
+  List<String> _taxOptions = ['YES', 'NO'];
 
   @override
   Widget build(BuildContext context) {
@@ -73,12 +79,14 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: _image != null ? Image.memory(_image!): IconButton(
-                            onPressed: () {
-                              selectGalleryImage();
-                            },
-                            icon: const Icon(Icons.camera_alt),
-                          ),
+                          child: _image != null
+                              ? Image.memory(_image!)
+                              : IconButton(
+                                  onPressed: () {
+                                    selectGalleryImage();
+                                  },
+                                  icon: const Icon(Icons.camera_alt),
+                                ),
                         ),
                       ],
                     ),
@@ -100,7 +108,9 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
 
                   // EMAIL INPUT FIELD
                   TextFormField(
@@ -110,7 +120,9 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                     ),
                   ),
 
-                  const SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
 
                   // PHONE INPUT FIELD
                   TextFormField(
@@ -141,13 +153,40 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                     ),
                   ),
 
-                  Row(
-                    children: [
-                      Text('Tax Registered?', style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),)
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Tax Registered?',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                    
+                        Flexible(
+                          child: Container(
+                            width: 100,
+                            child: DropdownButtonFormField(
+                              hint: const Text('Select'),
+                                items: _taxOptions
+                                    .map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    _taxStatus = value;
+                                  });
+                                }),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
