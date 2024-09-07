@@ -198,6 +198,26 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                         ),
                       ),
                     ),
+                    
+                    // SAVE BUTTON
+                    InkWell(
+                      onTap: () {},
+                      child: Container(
+                        height: 30,
+                        width: MediaQuery.of(context).size.width - 40,
+                        decoration: BoxDecoration(
+                          color: Colors.yellow.shade900,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Center(
+                          child: Text('Save', style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),),
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
