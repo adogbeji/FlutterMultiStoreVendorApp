@@ -188,6 +188,16 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                       ],
                     ),
                   ),
+
+                  if (_taxStatus == 'YES')
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                          labelText: 'Tax Number',
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
