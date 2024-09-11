@@ -1,7 +1,21 @@
 import 'package:flutter/foundation.dart';
+
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class VendorController {
+  final FirebaseStorage _storage = FirebaseStorage.instance;  // Stores firebase_storage package
+  final FirebaseAuth _auth = FirebaseAuth.instance;  // Stores firebase_auth package
+
+  // Stores profile picture in Firebase Storage
+  _uploadVendorImageToStorage(Uint8List? image) async {
+    Reference ref = _storage.ref().child('storeImage').child(_auth.currentUser!.uid);
+
+    UploadTask uploadTask = ref.putData(image!);
+
+    TaskSnapshot snapshot = await uploadTask;
+  }
 
   // Picks image from phone gallery or device camera
   pickStoreImage(ImageSource source) async {
