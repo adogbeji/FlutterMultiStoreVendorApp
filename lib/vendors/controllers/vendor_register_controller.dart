@@ -10,11 +10,17 @@ class VendorController {
 
   // Stores profile picture in Firebase Storage
   _uploadVendorImageToStorage(Uint8List? image) async {
-    Reference ref = _storage.ref().child('storeImage').child(_auth.currentUser!.uid);
+    Reference ref = _storage.ref()
+                            .child('storeImage')
+                            .child(_auth.currentUser!.uid);
 
-    UploadTask uploadTask = ref.putData(image!);
+    UploadTask uploadTask = ref.putData(image!);  // Stores result of uploaded image
 
     TaskSnapshot snapshot = await uploadTask;
+
+    String downloadURL = await snapshot.ref.getDownloadURL();  // Stores image download URL
+
+    return downloadURL;
   }
 
   // Picks image from phone gallery or device camera
@@ -30,6 +36,7 @@ class VendorController {
     }
   }
 
+  // Saves vendor data
   Future<String> registerVendor(
     String businessName, 
     String email, 
