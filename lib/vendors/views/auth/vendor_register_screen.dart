@@ -50,6 +50,14 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
 
   List<String> _taxOptions = ['YES', 'NO'];
 
+  _saveVendorDetail() {
+    if (_formKey.currentState!.validate()) {
+      print('Valid!');
+    } else {
+      print('Not Valid!');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -232,7 +240,9 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                       
                       // SAVE BUTTON
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          _saveVendorDetail();
+                        },
                         child: Container(
                           height: 30,
                           width: MediaQuery.of(context).size.width - 40,
