@@ -14,8 +14,9 @@ class VendorRegisterScreen extends StatefulWidget {
 }
 
 class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
-  final VendorController _vendorController =
-      VendorController(); // Stores VendorController class
+  final VendorController _vendorController = VendorController(); // Stores VendorController class
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();  // Form key
 
   late String countryValue;
 
@@ -98,155 +99,158 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Column(
-                children: [
-                  // BUSINESS NAME INPUT FIELD
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Business Name Must Not Be Empty!';
-                      } else {
-                        return null;  // Does nothing
-                      }
-                    },
-                    keyboardType: TextInputType.name, // Default??
-                    decoration: const InputDecoration(
-                      labelText: 'Business Name',
-                    ),
-                  ),
-
-                  const SizedBox(
-                    height: 10,
-                  ),
-
-                  // EMAIL INPUT FIELD
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Email Address Must Not Be Empty!';
-                      } else {
-                        return null;  // Does nothing
-                      }
-                    },
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                    ),
-                  ),
-
-                  const SizedBox(
-                    height: 10,
-                  ),
-
-                  // PHONE INPUT FIELD
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Phone Number Must Not Be Empty!';
-                      } else {
-                        return null;  // Does nothing
-                      }
-                    },
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      labelText: 'Phone Number',
-                    ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(14.0),
-                    child: SelectState(
-                      onCountryChanged: (value) {
-                        setState(() {
-                          countryValue = value;
-                        });
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    // BUSINESS NAME INPUT FIELD
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Business Name Must Not Be Empty!';
+                        } else {
+                          return null;  // Does nothing
+                        }
                       },
-                      onStateChanged: (value) {
-                        setState(() {
-                          stateValue = value;
-                        });
-                      },
-                      onCityChanged: (value) {
-                        setState(() {
-                          cityValue = value;
-                        });
-                      },
+                      keyboardType: TextInputType.name, // Default??
+                      decoration: const InputDecoration(
+                        labelText: 'Business Name',
+                      ),
                     ),
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Tax Registered?',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                    
-                        Flexible(
-                          child: Container(
-                            width: 100,
-                            child: DropdownButtonFormField(
-                              hint: const Text('Select'),
-                                items: _taxOptions
-                                    .map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    _taxStatus = value;
-                                  });
-                                }),
-                          ),
-                        ),
-                      ],
+                
+                    const SizedBox(
+                      height: 10,
                     ),
-                  ),
-
-                  if (_taxStatus == 'YES')
+                
+                    // EMAIL INPUT FIELD
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Email Address Must Not Be Empty!';
+                        } else {
+                          return null;  // Does nothing
+                        }
+                      },
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: const InputDecoration(
+                        labelText: 'Email',
+                      ),
+                    ),
+                
+                    const SizedBox(
+                      height: 10,
+                    ),
+                
+                    // PHONE INPUT FIELD
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Phone Number Must Not Be Empty!';
+                        } else {
+                          return null;  // Does nothing
+                        }
+                      },
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        labelText: 'Phone Number',
+                      ),
+                    ),
+                
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Tax Number Must Not Be Empty!';
-                          } else {
-                            return null;  // Does nothing
-                          }
+                      padding: const EdgeInsets.all(14.0),
+                      child: SelectState(
+                        onCountryChanged: (value) {
+                          setState(() {
+                            countryValue = value;
+                          });
                         },
-                        decoration: const InputDecoration(
-                          labelText: 'Tax Number',
-                        ),
+                        onStateChanged: (value) {
+                          setState(() {
+                            stateValue = value;
+                          });
+                        },
+                        onCityChanged: (value) {
+                          setState(() {
+                            cityValue = value;
+                          });
+                        },
                       ),
                     ),
-                    
-                    // SAVE BUTTON
-                    InkWell(
-                      onTap: () {},
-                      child: Container(
-                        height: 30,
-                        width: MediaQuery.of(context).size.width - 40,
-                        decoration: BoxDecoration(
-                          color: Colors.yellow.shade900,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: const Center(
-                          child: Text('Save', style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),),
-                        ),
+                
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'Tax Registered?',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                      
+                          Flexible(
+                            child: Container(
+                              width: 100,
+                              child: DropdownButtonFormField(
+                                hint: const Text('Select'),
+                                  items: _taxOptions
+                                      .map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _taxStatus = value;
+                                    });
+                                  }),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                ],
+                
+                    if (_taxStatus == 'YES')
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Tax Number Must Not Be Empty!';
+                            } else {
+                              return null;  // Does nothing
+                            }
+                          },
+                          decoration: const InputDecoration(
+                            labelText: 'Tax Number',
+                          ),
+                        ),
+                      ),
+                      
+                      // SAVE BUTTON
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          height: 30,
+                          width: MediaQuery.of(context).size.width - 40,
+                          decoration: BoxDecoration(
+                            color: Colors.yellow.shade900,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(
+                            child: Text('Save', style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
           ),
