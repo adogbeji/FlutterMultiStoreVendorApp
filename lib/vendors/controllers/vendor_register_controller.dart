@@ -63,7 +63,7 @@ class VendorController {
           taxNumber.isNotEmpty &&
           image != null
       ) {
-        String storage = await _uploadVendorImageToStorage(image);
+        String storeImage = await _uploadVendorImageToStorage(image);
 
         // Save data to Firestore Database
         await _firestore
@@ -78,6 +78,8 @@ class VendorController {
               'cityValue': cityValue,
               'taxOptions': taxOptions,
               'taxNumber': taxNumber,
+              'storeImage': storeImage,
+              'approved': false,
             });
       } else {
         res = 'Fields must not be empty';

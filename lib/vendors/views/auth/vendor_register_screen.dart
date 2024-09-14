@@ -102,6 +102,13 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                 children: [
                   // BUSINESS NAME INPUT FIELD
                   TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Business Name Must Not Be Empty!';
+                      } else {
+                        return null;  // Does nothing
+                      }
+                    },
                     keyboardType: TextInputType.name, // Default??
                     decoration: const InputDecoration(
                       labelText: 'Business Name',
@@ -114,6 +121,13 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
 
                   // EMAIL INPUT FIELD
                   TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Email Address Must Not Be Empty!';
+                      } else {
+                        return null;  // Does nothing
+                      }
+                    },
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
                       labelText: 'Email',
@@ -126,6 +140,13 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
 
                   // PHONE INPUT FIELD
                   TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Phone Number Must Not Be Empty!';
+                      } else {
+                        return null;  // Does nothing
+                      }
+                    },
                     keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                       labelText: 'Phone Number',
@@ -193,6 +214,13 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Tax Number Must Not Be Empty!';
+                          } else {
+                            return null;  // Does nothing
+                          }
+                        },
                         decoration: const InputDecoration(
                           labelText: 'Tax Number',
                         ),
