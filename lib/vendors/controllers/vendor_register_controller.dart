@@ -46,7 +46,7 @@ class VendorController {
     String countryValue, 
     String stateValue, 
     String cityValue, 
-    String taxOptions, 
+    String taxRegistered, 
     String taxNumber,
     Uint8List? image
   ) async {
@@ -59,7 +59,7 @@ class VendorController {
           countryValue.isEmpty &&
           stateValue.isNotEmpty &&
           cityValue.isNotEmpty &&
-          taxOptions.isNotEmpty &&
+          taxRegistered.isNotEmpty &&
           taxNumber.isNotEmpty &&
           image != null
       ) {
@@ -76,7 +76,7 @@ class VendorController {
               'countryValue': countryValue,
               'stateValue': stateValue,
               'cityValue': cityValue,
-              'taxOptions': taxOptions,
+              'taxRegistered': taxRegistered,
               'taxNumber': taxNumber,
               'storeImage': storeImage,
               'approved': false,

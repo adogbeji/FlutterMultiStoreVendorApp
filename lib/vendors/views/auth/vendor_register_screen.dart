@@ -18,6 +18,14 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();  // Form key
 
+  late String businessName;
+
+  late String email;
+
+  late String phoneNumber;
+
+  late String taxNumber;
+
   late String countryValue;
 
   late String stateValue;
@@ -52,7 +60,18 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
 
   _saveVendorDetail() {
     if (_formKey.currentState!.validate()) {
-      print('Valid!');
+      // print('Valid!');
+      _vendorController.registerVendor(
+        businessName, 
+        email, 
+        phoneNumber, 
+        countryValue, 
+        stateValue, 
+        cityValue, 
+        _taxStatus!, 
+        taxNumber, 
+        _image
+      );
     } else {
       print('Not Valid!');
     }
