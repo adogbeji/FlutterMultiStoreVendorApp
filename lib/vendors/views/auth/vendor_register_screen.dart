@@ -132,6 +132,9 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                   children: [
                     // BUSINESS NAME INPUT FIELD
                     TextFormField(
+                      onChanged: (value) {
+                        businessName = value;
+                      },
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Business Name Must Not Be Empty!';
@@ -151,6 +154,9 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                 
                     // EMAIL INPUT FIELD
                     TextFormField(
+                      onChanged: (value) {
+                        email = value;
+                      },
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Email Address Must Not Be Empty!';
@@ -170,6 +176,9 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                 
                     // PHONE INPUT FIELD
                     TextFormField(
+                      onChanged: (value) {
+                        phoneNumber = value;
+                      },
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Phone Number Must Not Be Empty!';
@@ -244,6 +253,9 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: TextFormField(
+                          onChanged: (value) {
+                            taxNumber = value;
+                          },
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Tax Number Must Not Be Empty!';
