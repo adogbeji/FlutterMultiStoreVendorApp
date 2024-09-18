@@ -53,16 +53,6 @@ class VendorController {
     String res = 'Some error occured';
 
     try {
-      if (businessName.isNotEmpty &&
-          email.isNotEmpty &&
-          phoneNumber.isNotEmpty &&
-          countryValue.isEmpty &&
-          stateValue.isNotEmpty &&
-          cityValue.isNotEmpty &&
-          taxRegistered.isNotEmpty &&
-          taxNumber.isNotEmpty &&
-          image != null
-      ) {
         String storeImage = await _uploadVendorImageToStorage(image);
 
         // Save data to Firestore Database
@@ -81,9 +71,6 @@ class VendorController {
               'storeImage': storeImage,
               'approved': false,
             });
-      } else {
-        res = 'Fields must not be empty';
-      }
     } catch (e) {
       res = e.toString();
     }
