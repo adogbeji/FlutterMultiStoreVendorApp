@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:country_state_city_picker_2/country_state_city_picker.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:multi_store_vendor/vendors/controllers/vendor_register_controller.dart';
@@ -59,6 +60,7 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
   List<String> _taxOptions = ['YES', 'NO'];
 
   _saveVendorDetail() {
+    EasyLoading.show(status: 'PLEASE WAIT');  // Shows loading spinner
     if (_formKey.currentState!.validate()) {
       // print('Valid!');
       _vendorController.registerVendor(
@@ -71,7 +73,15 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
         _taxStatus!, 
         taxNumber, 
         _image
-      );
+      ).whenComplete(() {
+        EasyLoading.dismiss();  // Stops loading spinner
+
+        setState(() {
+          _formKey.currentState!.reset();  // Clears all fields
+
+          _image = null;
+        });
+      });
     } else {
       print('Not Valid!');
     }
