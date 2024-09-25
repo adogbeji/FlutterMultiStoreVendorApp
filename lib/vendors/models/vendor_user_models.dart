@@ -23,5 +23,17 @@ class VendorUserModel {
   final String? taxNumber;
   final String? taxRegistered;
 
-  VendorUserModel.fromJson(Map<String, object> json): this
+  VendorUserModel.fromJson(Map<String, Object> json): 
+  this(
+    approved: json['approved']! as bool,
+    businessName: json['businessName']! as String,
+    cityValue: json['cityValue']! as String,
+    countryValue: json['countryValue']! as String,
+    email: json['email']! as String,
+    phoneNumber: json['phoneNumber']! as String,
+    stateValue: json['stateValue']! as String,
+    storeImage: json['storeImage']! as String,
+    taxNumber: json['taxNumber']! as String,
+    taxRegistered: json['taxRegistered']! as String,
+  );
 }
